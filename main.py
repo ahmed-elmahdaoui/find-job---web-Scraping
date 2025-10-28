@@ -6,18 +6,12 @@ import requests
 import time
 from urllib.parse import quote
 from datetime import datetime
+import os
+import uvicorn
 
-# ==============================
-# Initialisation de l'application
-# ==============================
+app = FastAPI()
 
-app = FastAPI(
-    title="LinkedIn Jobs Finder API",
-    version="2.0",
-    description="API REST pour scraper ou simuler des offres d'emploi depuis LinkedIn"
-)
-
-# Autoriser les appels depuis ton frontend
+# Autoriser toutes les origines (CORS)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -188,10 +182,16 @@ import os
 import uvicorn
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))  # valeur par défaut = 8000
     print("=" * 60)
     print("🚀 API LinkedIn Jobs Finder (FastAPI)")
     print("📍 URL: http://localhost:8000")
     print("📚 Documentation: http://localhost:8000/docs")
     print("=" * 60)
-    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
+    try:
+        port = int(os.environ.get("PORT", 8000))
+        if not (0 <= port <= 65535):
+            raise ValueError("Port invalide")
+    except Exception:
+        port = 8000  # valeur par défaut en cas d’erreur
+
+    uvicorn.run("main:app", host="0.0.0.0", port=port)
