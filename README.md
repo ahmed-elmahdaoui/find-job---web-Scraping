@@ -764,4 +764,4 @@ Si vous rencontrez des problèmes :
 
 💼 **Bonne chance dans votre recherche d'opportunités professionnelles !**
 
-Made with ❤️ and 🐍 by [Votre Nom]
+Made with ❤️ and 🐍 by [Ahmed EL MAHDAOUI]
